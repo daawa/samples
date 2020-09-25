@@ -3,9 +3,9 @@
 
 import 'dart:math' as math;
 
-import 'package:flutter_web/foundation.dart';
-import 'package:flutter_web/material.dart';
-import 'package:flutter_web/rendering.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'infinite_listview.dart';
 
@@ -186,9 +186,9 @@ class NumberPicker extends StatelessWidget {
   }
 
   Widget _integerListView(ThemeData themeData) {
-    TextStyle defaultStyle = themeData.textTheme.body1;
+    TextStyle defaultStyle = themeData.textTheme.bodyText2;
     TextStyle selectedStyle =
-        themeData.textTheme.headline.copyWith(color: themeData.accentColor);
+        themeData.textTheme.headline5.copyWith(color: themeData.accentColor);
 
     var listItemCount = integerItemCount + 2;
 
@@ -223,9 +223,9 @@ class NumberPicker extends StatelessWidget {
   }
 
   Widget _decimalListView(ThemeData themeData) {
-    TextStyle defaultStyle = themeData.textTheme.body1;
+    TextStyle defaultStyle = themeData.textTheme.bodyText2;
     TextStyle selectedStyle =
-        themeData.textTheme.headline.copyWith(color: themeData.accentColor);
+        themeData.textTheme.headline5.copyWith(color: themeData.accentColor);
 
     int decimalItemCount =
         selectedIntValue == maxValue ? 3 : math.pow(10, decimalPlaces) + 2;
@@ -262,9 +262,9 @@ class NumberPicker extends StatelessWidget {
   }
 
   Widget _integerInfiniteListView(ThemeData themeData) {
-    TextStyle defaultStyle = themeData.textTheme.body1;
+    TextStyle defaultStyle = themeData.textTheme.bodyText2;
     TextStyle selectedStyle =
-        themeData.textTheme.headline.copyWith(color: themeData.accentColor);
+        themeData.textTheme.headline5.copyWith(color: themeData.accentColor);
 
     return new NotificationListener(
       child: new Container(
@@ -399,7 +399,7 @@ class NumberPicker extends StatelessWidget {
       Notification notification, ScrollController scrollController) {
     return notification is UserScrollNotification &&
         notification.direction == ScrollDirection.idle &&
-        // ignore: invalid_use_of_protected_member
+        // ignore: invalid_use_of_protected_member,invalid_use_of_visible_for_testing_member
         scrollController.position.activity is! HoldScrollActivity;
   }
 

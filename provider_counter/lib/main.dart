@@ -1,3 +1,7 @@
+// Copyright 2019 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +17,7 @@ void main() {
       // Initialize the model in the builder. That way, Provider
       // can own Counter's lifecycle, making sure to call `dispose`
       // when not needed anymore.
-      builder: (context) => Counter(),
+      create: (context) => Counter(),
       child: MyApp(),
     ),
   );
@@ -63,25 +67,34 @@ class MyHomePage extends StatelessWidget {
             // rebuilds if the model is updated.
             Consumer<Counter>(
               builder: (context, counter, child) => Text(
-                    '${counter.value}',
-                    style: Theme.of(context).textTheme.display1,
-                  ),
+                '${counter.value}',
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // Provider.of is another way to access the model object held
-        // by an ancestor Provider. By default, even this listens to
-        // changes in the model, and rebuilds the whole encompassing widget
-        // when notified.
-        //
-        // By using `listen: false` below, we are disabling that
-        // behavior. We are only calling a function here, and so we don't care
-        // about the current value. Without `listen: false`, we'd be rebuilding
-        // the whole MyHomePage whenever Counter notifies listeners.
-        onPressed: () =>
-            Provider.of<Counter>(context, listen: false).increment(),
+        onPressed: () {
+          // You can access your providers anywhere you have access
+          // to the context. One way is to use Provider<Counter>.of(context).
+          //
+          // The provider package also defines extension methods on context
+          // itself. You can call context.watch<Counter>() in a build method
+          // of any widget to access the current state of Counter, and to ask
+          // Flutter to rebuild your widget anytime Counter changes.
+          //
+          // You can't use context.watch() outside build methods, because that
+          // often leads to subtle bugs. Instead, you should use
+          // context.read<Counter>(), which gets the current state
+          // but doesn't ask Flutter for future rebuilds.
+          //
+          // Since we're in a callback that will be called whenever the user
+          // taps the FloatingActionButton, we are not in the build method here.
+          // We should use context.read().
+          var counter = context.read<Counter>();
+          counter.increment();
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),

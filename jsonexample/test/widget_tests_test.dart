@@ -10,8 +10,7 @@ import 'package:jsonexample/widgets.dart';
 
 void main() {
   group('SimpleObjectView widget test', () {
-    testWidgets('Typical object is displayed correctly',
-        (WidgetTester tester) async {
+    testWidgets('Typical object is displayed correctly', (tester) async {
       final simpleObject = ConvertedSimpleObject(
         aString: 'Blah, blah, blah',
         anInt: 1,
@@ -35,8 +34,7 @@ void main() {
       expect(find.text('[1.0, 2.0, 3.0]'), findsOneWidget);
     });
 
-    testWidgets('Empty lists are displayed as brackets',
-        (WidgetTester tester) async {
+    testWidgets('Empty lists are displayed as brackets', (tester) async {
       final simpleObject = ConvertedSimpleObject(
         aString: 'Blah, blah, blah',
         anInt: 1,
@@ -55,8 +53,7 @@ void main() {
       expect(find.text('[]'), findsNWidgets(3));
     });
 
-    testWidgets('Null values are displayed as NULL',
-        (WidgetTester tester) async {
+    testWidgets('Null values are displayed as NULL', (tester) async {
       final simpleObject = ConvertedSimpleObject(
         aString: null,
         anInt: null,
@@ -77,8 +74,7 @@ void main() {
   });
 
   group('ComplexObjectView widget test', () {
-    testWidgets('Typical object is displayed correctly',
-        (WidgetTester tester) async {
+    testWidgets('Typical object is displayed correctly', (tester) async {
       final complexObject = ConvertedComplexObject(
         aString: 'Blah, blah, blah',
         anInt: 1,
@@ -87,7 +83,7 @@ void main() {
         aListOfInts: [1, 2, 3],
         aListOfDoubles: [1.0, 2.0, 3.0],
         anObject: ConvertedSimpleObject(
-          aString: "Child 1",
+          aString: 'Child 1',
           anInt: 101,
           aDouble: 101.0,
           aListOfStrings: ['1011', '1012', '1013'],
@@ -96,7 +92,7 @@ void main() {
         ),
         aListOfObjects: [
           ConvertedSimpleObject(
-            aString: "Child 2",
+            aString: 'Child 2',
             anInt: 102,
             aDouble: 102.0,
             aListOfStrings: ['1021', '1022', '1023'],
@@ -104,7 +100,7 @@ void main() {
             aListOfDoubles: [1021.0, 1022.0, 1023.0],
           ),
           ConvertedSimpleObject(
-            aString: "Child 3",
+            aString: 'Child 3',
             anInt: 103,
             aDouble: 103.0,
             aListOfStrings: ['1031', '1032', '1033'],
@@ -112,7 +108,7 @@ void main() {
             aListOfDoubles: [1031.0, 1032.0, 1033.0],
           ),
           ConvertedSimpleObject(
-            aString: "Child 4",
+            aString: 'Child 4',
             anInt: 104,
             aDouble: 104.0,
             aListOfStrings: ['1041', '1042', '1043'],
@@ -135,7 +131,7 @@ void main() {
       expect(find.text('[1, 2, 3]'), findsOneWidget);
       expect(find.text('[1.0, 2.0, 3.0]'), findsOneWidget);
 
-      for (int i = 1; i <= 4; i++) {
+      for (var i = 1; i <= 4; i++) {
         expect(find.text('"Child $i"'), findsOneWidget);
         expect(find.text('10$i'), findsOneWidget);
         expect(find.text('10$i.0'), findsOneWidget);
@@ -145,8 +141,7 @@ void main() {
       }
     });
 
-    testWidgets('Empty lists are displayed as brackets',
-        (WidgetTester tester) async {
+    testWidgets('Empty lists are displayed as brackets', (tester) async {
       final complexObject = ConvertedComplexObject(
         aString: 'Blah, blah, blah',
         anInt: 1,
@@ -155,7 +150,7 @@ void main() {
         aListOfInts: [],
         aListOfDoubles: [],
         anObject: ConvertedSimpleObject(
-          aString: "Child 1",
+          aString: 'Child 1',
           anInt: 101,
           aDouble: 101.0,
           aListOfStrings: ['1011', '1012', '1013'],
@@ -174,8 +169,7 @@ void main() {
       expect(find.text('[]'), findsNWidgets(4));
     });
 
-    testWidgets('Null values are displayed as NULL',
-        (WidgetTester tester) async {
+    testWidgets('Null values are displayed as NULL', (tester) async {
       final complexObject = ConvertedComplexObject(
         aString: null,
         anInt: null,

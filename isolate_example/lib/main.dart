@@ -14,11 +14,19 @@
 
 import 'package:flutter/material.dart';
 
+import 'data_transfer_page.dart';
+import 'infinite_process_page.dart';
+import 'performance_page.dart';
+
 void main() {
-  runApp(StartApp());
+  runApp(
+    MaterialApp(
+      home: HomePage(),
+    ),
+  );
 }
 
-class StartApp extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,9 +36,18 @@ class StartApp extends StatelessWidget {
           appBar: AppBar(
             bottom: TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.flash_on), text: 'Performance'),
-                Tab(icon: Icon(Icons.sync), text: 'Infinite Process'),
-                Tab(icon: Icon(Icons.storage), text: 'Data Transfer'),
+                Tab(
+                  icon: Icon(Icons.flash_on),
+                  text: 'Performance',
+                ),
+                Tab(
+                  icon: Icon(Icons.sync),
+                  text: 'Infinite Process',
+                ),
+                Tab(
+                  icon: Icon(Icons.storage),
+                  text: 'Data Transfer',
+                ),
               ],
             ),
             title: Text('Isolate Example'),
@@ -38,39 +55,12 @@ class StartApp extends StatelessWidget {
           body: TabBarView(
             children: [
               PerformancePage(),
-              InfiniteProcessPage(),
-              DataTransferPage(),
+              InfiniteProcessPageStarter(),
+              DataTransferPageStarter(),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class PerformancePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Welcome to the Performance Page'),
-    );
-  }
-}
-
-class InfiniteProcessPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Welcome to the Infinite Process Page'),
-    );
-  }
-}
-
-class DataTransferPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Welcome to the Data Transfer Page'),
     );
   }
 }

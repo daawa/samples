@@ -1,4 +1,4 @@
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
 
 class Cook extends StatefulWidget {
   final List dr;
@@ -36,7 +36,7 @@ class CState extends State<Cook> {
                   title: Text(widget.nme,
                       style: Theme.of(ct)
                           .textTheme
-                          .display2
+                          .headline3
                           .copyWith(fontFamily: 'ark', color: Colors.black))),
               margin: EdgeInsets.only(top: 40, bottom: 30, left: 20)),
           Expanded(

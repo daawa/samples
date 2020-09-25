@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'widgets.dart';
 
-// Page shown when a card in the songs tab is tapped.
-//
-// On Android, this page sits at the top of your app. On iOS, this page is on
-// top of the songs tab's content but is below the tab bar itself.
+/// Page shown when a card in the songs tab is tapped.
+///
+/// On Android, this page sits at the top of your app. On iOS, this page is on
+/// top of the songs tab's content but is below the tab bar itself.
 class SongDetailTab extends StatelessWidget {
   const SongDetailTab({this.id, this.song, this.color});
 
@@ -77,14 +77,14 @@ class SongDetailTab extends StatelessWidget {
   // Non-shared code below because we're using different scaffolds.
   // ===========================================================================
 
-  Widget _buildAndroid(context) {
+  Widget _buildAndroid(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(song)),
       body: _buildBody(),
     );
   }
 
-  Widget _buildIos(context) {
+  Widget _buildIos(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text(song),

@@ -47,7 +47,7 @@ class PressableCard extends StatefulWidget {
   final Widget child;
 
   @override
-  State<StatefulWidget> createState() => new _PressableCardState();
+  State<StatefulWidget> createState() => _PressableCardState();
 }
 
 class _PressableCardState extends State<PressableCard>
@@ -222,7 +222,7 @@ class SongPlaceholderTile extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              color: Colors.grey[400],
+              color: Theme.of(context).textTheme.bodyText2.color,
               width: 130,
             ),
             Padding(
@@ -235,27 +235,27 @@ class SongPlaceholderTile extends StatelessWidget {
                   Container(
                     height: 9,
                     margin: EdgeInsets.only(right: 60),
-                    color: Colors.grey[300],
+                    color: Theme.of(context).textTheme.bodyText2.color,
                   ),
                   Container(
                     height: 9,
                     margin: EdgeInsets.only(right: 20, top: 8),
-                    color: Colors.grey[300],
+                    color: Theme.of(context).textTheme.bodyText2.color,
                   ),
                   Container(
                     height: 9,
                     margin: EdgeInsets.only(right: 40, top: 8),
-                    color: Colors.grey[300],
+                    color: Theme.of(context).textTheme.bodyText2.color,
                   ),
                   Container(
                     height: 9,
                     margin: EdgeInsets.only(right: 80, top: 8),
-                    color: Colors.grey[300],
+                    color: Theme.of(context).textTheme.bodyText2.color,
                   ),
                   Container(
                     height: 9,
                     margin: EdgeInsets.only(right: 50, top: 8),
-                    color: Colors.grey[300],
+                    color: Theme.of(context).textTheme.bodyText2.color,
                   ),
                 ],
               ),
@@ -280,10 +280,10 @@ class SongPlaceholderTile extends StatelessWidget {
 void showChoices(BuildContext context, List<String> choices) {
   switch (defaultTargetPlatform) {
     case TargetPlatform.android:
-      showDialog(
+      showDialog<void>(
         context: context,
         builder: (context) {
-          int selectedRadio = 1;
+          var selectedRadio = 1;
           return AlertDialog(
             contentPadding: EdgeInsets.only(top: 12),
             content: StatefulBuilder(
@@ -295,7 +295,8 @@ void showChoices(BuildContext context, List<String> choices) {
                       title: Text(choices[index]),
                       value: index,
                       groupValue: selectedRadio,
-                      onChanged: (value) {
+                      // ignore: avoid_types_on_closure_parameters
+                      onChanged: (int value) {
                         setState(() => selectedRadio = value);
                       },
                     );
@@ -318,12 +319,13 @@ void showChoices(BuildContext context, List<String> choices) {
       );
       return;
     case TargetPlatform.iOS:
-      showCupertinoModalPopup(
+      showCupertinoModalPopup<void>(
         context: context,
         builder: (context) {
           return SizedBox(
             height: 250,
             child: CupertinoPicker(
+              backgroundColor: Theme.of(context).canvasColor,
               useMagnifier: true,
               magnification: 1.1,
               itemExtent: 40,

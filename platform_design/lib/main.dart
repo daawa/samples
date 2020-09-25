@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
-import 'songs_tab.dart';
 import 'news_tab.dart';
 import 'profile_tab.dart';
 import 'settings_tab.dart';
+import 'songs_tab.dart';
 import 'widgets.dart';
 
 void main() => runApp(MyAdaptingApp());
@@ -13,8 +12,6 @@ void main() => runApp(MyAdaptingApp());
 class MyAdaptingApp extends StatelessWidget {
   @override
   Widget build(context) {
-    // Change this value to better see animations.
-    timeDilation = 1;
     // Either Material or Cupertino widgets work in either Material or Cupertino
     // Apps.
     return MaterialApp(
@@ -23,6 +20,7 @@ class MyAdaptingApp extends StatelessWidget {
         // Use the green theme for Material widgets.
         primarySwatch: Colors.green,
       ),
+      darkTheme: ThemeData.dark(),
       builder: (context, child) {
         return CupertinoTheme(
           // Instead of letting Cupertino widgets auto-adapt to the Material
@@ -52,7 +50,7 @@ class PlatformAdaptingHomePage extends StatefulWidget {
 
 class _PlatformAdaptingHomePageState extends State<PlatformAdaptingHomePage> {
   // This app keeps a global key for the songs tab because it owns a bunch of
-  // data. Since changing platform reparents those tabs into different
+  // data. Since changing platform re-parents those tabs into different
   // scaffolds, keeping a global key to it lets this app keep that tab's data as
   // the platform toggles.
   //
@@ -62,7 +60,7 @@ class _PlatformAdaptingHomePageState extends State<PlatformAdaptingHomePage> {
   // In Material, this app uses the hamburger menu paradigm and flatly lists
   // all 4 possible tabs. This drawer is injected into the songs tab which is
   // actually building the scaffold around the drawer.
-  Widget _buildAndroidHomePage(context) {
+  Widget _buildAndroidHomePage(BuildContext context) {
     return SongsTab(
       key: songsTabKey,
       androidDrawer: _AndroidDrawer(),
@@ -77,7 +75,7 @@ class _PlatformAdaptingHomePageState extends State<PlatformAdaptingHomePage> {
   // large number of items, a tab bar cannot. To illustrate one way of adjusting
   // for this, the app folds its fourth tab (the settings page) into the
   // third tab. This is a common pattern on iOS.
-  Widget _buildIosHomePage(context) {
+  Widget _buildIosHomePage(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: [
@@ -153,7 +151,7 @@ class _AndroidDrawer extends StatelessWidget {
             title: Text(NewsTab.title),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
+              Navigator.push<void>(
                   context, MaterialPageRoute(builder: (context) => NewsTab()));
             },
           ),
@@ -162,7 +160,7 @@ class _AndroidDrawer extends StatelessWidget {
             title: Text(ProfileTab.title),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context,
+              Navigator.push<void>(context,
                   MaterialPageRoute(builder: (context) => ProfileTab()));
             },
           ),
@@ -176,7 +174,7 @@ class _AndroidDrawer extends StatelessWidget {
             title: Text(SettingsTab.title),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context,
+              Navigator.push<void>(context,
                   MaterialPageRoute(builder: (context) => SettingsTab()));
             },
           ),
